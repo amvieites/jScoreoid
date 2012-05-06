@@ -3,7 +3,6 @@ package es.vieites.jscoreoid.api.score;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
@@ -49,7 +48,7 @@ public class ScoreFacade extends AbstractFacade implements Scoreinterface {
             value = "json";
             request.addParameter("response", value);
         } catch (MalformedURLException e) {
-            throw new RequestException("Bad URL: " + this.requestUrl + "getGame", e);
+            throw new RequestException("Bad URL: " + this.requestUrl + "createScore", e);
         } catch (UnsupportedEncodingException e) {
             throw new RequestException("Bad enconding for parameter value: " + value, e);
         }
@@ -87,33 +86,130 @@ public class ScoreFacade extends AbstractFacade implements Scoreinterface {
         return false;
     }
 
-    public Long countScores(String gameId, Date startDate, Date endDate, String platform,
+    public Long countScores(String gameId, String startDate, String endDate, String platform,
             String difficulty) throws RequestException {
-        // TODO Auto-generated method stub
-        return null;
+        Petition request = null;
+        String rawResponse = null;
+        Long response = -1l;
+
+        // Build the request.
+        try {
+            request = new Petition(this.requestUrl + "countScores", this.apiKey);
+            request.addParameter("game_id", gameId);
+            request.addParameter("start_date", startDate);
+            request.addParameter("end_date", endDate);
+            request.addParameter("platform", platform);
+            request.addParameter("difficulty", difficulty);
+            request.addParameter("response", "json");
+        } catch (MalformedURLException e) {
+            throw new RequestException("Bad URL: " + this.requestUrl + "countScores", e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RequestException("Bad enconding for parameter value", e);
+        }
+
+        // Send the request and get the JSON response.
+        try {
+            rawResponse = this.client.doPost(request);
+        } catch (IOException e) {
+            throw new RequestException("Something went wrong sending the request", e);
+        }
+
+        // Map the JSON response to the model object.
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode;
+        JsonNode childNode = null;
+
+        try {
+            rootNode = mapper.readTree(rawResponse);
+
+            childNode = rootNode.findValue("scores");
+            if (childNode != null) {
+                response = childNode.asLong();
+            } else {
+                childNode = rootNode.findValue("error");
+                if (childNode != null) {
+                    throw new RequestException(rootNode.findValue("error").toString());
+                }
+            }
+        } catch (JsonProcessingException e) {
+            throw new RequestException("JSON error", e);
+        } catch (IOException e) {
+            throw new RequestException("IO error", e);
+        }
+
+        return response;
     }
 
-    public Long countBestScores(String gameId, Date startDate, Date endDate, String platform,
+    public Long countBestScores(String gameId, String startDate, String endDate, String platform,
             String difficulty) throws RequestException {
-        // TODO Auto-generated method stub
-        return null;
+
+        Petition request = null;
+        String rawResponse = null;
+        Long response = -1l;
+
+        // Build the request.
+        try {
+            request = new Petition(this.requestUrl + "countBestScores", this.apiKey);
+            request.addParameter("game_id", gameId);
+            request.addParameter("start_date", startDate);
+            request.addParameter("end_date", endDate);
+            request.addParameter("platform", platform);
+            request.addParameter("difficulty", difficulty);
+            request.addParameter("response", "json");
+        } catch (MalformedURLException e) {
+            throw new RequestException("Bad URL: " + this.requestUrl + "countScores", e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RequestException("Bad enconding for parameter value", e);
+        }
+
+        // Send the request and get the JSON response.
+        try {
+            rawResponse = this.client.doPost(request);
+        } catch (IOException e) {
+            throw new RequestException("Something went wrong sending the request", e);
+        }
+
+        // Map the JSON response to the model object.
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode;
+        JsonNode childNode = null;
+
+        try {
+            rootNode = mapper.readTree(rawResponse);
+
+            childNode = rootNode.findValue("best_scores");
+            if (childNode != null) {
+                response = childNode.asLong();
+            } else {
+                childNode = rootNode.findValue("error");
+                if (childNode != null) {
+                    throw new RequestException(rootNode.findValue("error").toString());
+                }
+            }
+        } catch (JsonProcessingException e) {
+            throw new RequestException("JSON error", e);
+        } catch (IOException e) {
+            throw new RequestException("IO error", e);
+        }
+
+        return response;
     }
 
     public List<Score> getScores(String gameId, String orderBy, String order, String limit,
-            Date startDate, Date endDate, String platform, String difficulty)
+            String startDate, String endDate, String platform, String difficulty)
             throws RequestException {
         // TODO Auto-generated method stub
         return null;
     }
 
     public List<Score> getBestScores(String gameId, String orderBy, String order, String limit,
-            Date startDate, Date endDate, String platform, String difficulty)
+            String startDate, String endDate, String platform, String difficulty)
             throws RequestException {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public Double getAverageScore(String gameId, Date startDate, Date endDate, String platform,
+    public Double getAverageScore(String gameId, String startDate, String endDate, String platform,
             String difficulty) throws RequestException {
         // TODO Auto-generated method stub
         return null;

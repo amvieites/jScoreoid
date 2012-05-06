@@ -100,7 +100,7 @@ public class GameFacade extends AbstractFacade implements GameInterface {
             value = "json";
             request.addParameter("response", value);
         } catch (MalformedURLException e) {
-            throw new RequestException("Bad URL: " + this.requestUrl + "getGame", e);
+            throw new RequestException("Bad URL: " + this.requestUrl + "getPlayers", e);
         } catch (UnsupportedEncodingException e) {
             throw new RequestException("Bad enconding for parameter value: " + value, e);
         }

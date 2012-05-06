@@ -1,6 +1,5 @@
 package es.vieites.jscoreoid.api.score;
 
-import java.util.Date;
 import java.util.List;
 
 import es.vieites.jscoreoid.exceptions.RequestException;
@@ -33,8 +32,8 @@ public interface Scoreinterface {
      * @return the number of scores
      * @throws RequestException if something go wrong
      */
-    Long countScores(String gameId, Date startDate, Date endDate, String platform, String difficulty)
-            throws RequestException;
+    Long countScores(String gameId, String startDate, String endDate, String platform,
+            String difficulty) throws RequestException;
 
     /**
      * Returns total number of best scores for the game.
@@ -47,8 +46,8 @@ public interface Scoreinterface {
      * @return the number of scores
      * @throws RequestException if something go wrong
      */
-    Long countBestScores(String gameId, Date startDate, Date endDate, String platform, String difficulty)
-            throws RequestException;
+    Long countBestScores(String gameId, String startDate, String endDate, String platform,
+            String difficulty) throws RequestException;
 
     /**
      * This method is pulling all the scores for a game.
@@ -64,7 +63,8 @@ public interface Scoreinterface {
      * @return the list of scores
      * @throws RequestException if something go wrong
      */
-    List<Score> getScores(String gameId, String orderBy, String order, String limit, Date startDate, Date endDate, String platform, String difficulty)
+    List<Score> getScores(String gameId, String orderBy, String order, String limit,
+            String startDate, String endDate, String platform, String difficulty)
             throws RequestException;
 
     /**
@@ -81,7 +81,8 @@ public interface Scoreinterface {
      * @return the list of scores
      * @throws RequestException if something go wrong
      */
-    List<Score> getBestScores(String gameId, String orderBy, String order, String limit, Date startDate, Date endDate, String platform, String difficulty)
+    List<Score> getBestScores(String gameId, String orderBy, String order, String limit,
+            String startDate, String endDate, String platform, String difficulty)
             throws RequestException;
 
     /**
@@ -95,6 +96,6 @@ public interface Scoreinterface {
      * @return the averga score
      * @throws RequestException if something go wrong
      */
-    Double getAverageScore(String gameId, Date startDate, Date endDate, String platform, String difficulty)
-            throws RequestException;
+    Double getAverageScore(String gameId, String startDate, String endDate, String platform,
+            String difficulty) throws RequestException;
 }
