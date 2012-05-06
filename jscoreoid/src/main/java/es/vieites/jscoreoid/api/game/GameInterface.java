@@ -9,7 +9,7 @@ import es.vieites.jscoreoid.model.Notification;
 import es.vieites.jscoreoid.model.Player;
 
 /**
- * Interface for the Game operations of the scoreoid API.
+ * Interface for the Game API operations.
  * 
  * @author Alejandro Martínez Vieites
  */

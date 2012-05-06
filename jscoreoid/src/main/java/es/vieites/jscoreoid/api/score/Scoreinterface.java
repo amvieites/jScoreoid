@@ -3,8 +3,14 @@ package es.vieites.jscoreoid.api.score;
 import java.util.List;
 
 import es.vieites.jscoreoid.exceptions.RequestException;
+import es.vieites.jscoreoid.model.Player;
 import es.vieites.jscoreoid.model.Score;
 
+/**
+ * Interface for the Score API operations.
+ * 
+ * @author Alejandro Martínez Vieites
+ */
 public interface Scoreinterface {
 
     /**
@@ -18,7 +24,7 @@ public interface Scoreinterface {
      * @param difficulty (optional)
      * @return true, if the score has been created
      */
-    Boolean createScore(String gameId, Long score, String username, String platform,
+    Boolean createScore(String gameId, String username, Long score, String platform,
             String uniqueId, String difficulty) throws RequestException;
 
     /**
@@ -51,6 +57,18 @@ public interface Scoreinterface {
 
     /**
      * This method is pulling all the scores for a game.
+     * <p>
+     * The {@link Player} instance does not contain all the information of the player but only the
+     * following data:
+     * <ul>
+     * <li>username</li>
+     * <li>email</li>
+     * <li>first name</li>
+     * <li>last name</li>
+     * <li>platform</li>
+     * </ul>
+     * The rest of the {@link Player}s data will not be filled.
+     * </p>
      * 
      * @param gameId the game identifier
      * @param orderBy field to order by (optional)
@@ -69,6 +87,19 @@ public interface Scoreinterface {
 
     /**
      * This method is pulling all the best scores for a game.
+     * 
+     * <p>
+     * The {@link Player} instance does not contain all the information of the player but only the
+     * following data:
+     * <ul>
+     * <li>username</li>
+     * <li>email</li>
+     * <li>first name</li>
+     * <li>last name</li>
+     * <li>platform</li>
+     * </ul>
+     * The rest of the {@link Player}s data will not be filled.
+     * </p>
      * 
      * @param gameId the game identifier
      * @param orderBy field to order by (optional)

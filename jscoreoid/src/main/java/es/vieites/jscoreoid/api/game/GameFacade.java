@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,13 +27,13 @@ import es.vieites.jscoreoid.model.Player;
 public class GameFacade extends AbstractFacade implements GameInterface {
 
     /**
-     * Constructor for asking the Game part of the API.
+     * Constructor for asking the Games part of the API.
      * 
      * @param url the URL of the scoreoid API (https://www.scoreoid.com/api/)
      * @param apiKey the API key scoreoid gave to you
      */
     public GameFacade(String url, String apiKey) {
-        super(apiKey, url);
+        super(url, apiKey);
     }
 
     public Game getGame(String gameId) throws RequestException {
@@ -83,8 +84,7 @@ public class GameFacade extends AbstractFacade implements GameInterface {
     }
 
     public String getGameField(String gameId, GameFields field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
 
     public List<Player> getPlayers(String gameId) {
@@ -140,28 +140,22 @@ public class GameFacade extends AbstractFacade implements GameInterface {
     }
 
     public String getGameAverage(String gameId, GameFields field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
 
     public String getGameTop(String gameId, GameFields field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
 
     public String getGameLowest(String gameId, GameFields field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
 
     public String getGameTotal(String gameId, GameFields field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
 
     public List<Notification> getNotification(String gameId) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException("Not implemented yet.");
     }
-
 }
